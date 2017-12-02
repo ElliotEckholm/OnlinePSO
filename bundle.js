@@ -8,25 +8,32 @@
 var Parser = require('expr-eval').Parser;
 
 
-function optimize() {
+window.optimize = function() {
 
-
-    var fitnessFunction = document.getElementById("fitnessFunction");
+    //load input
     var parameter = document.getElementById("parameter");
+    //var params = parameter.value.split(",");
+    var fitnessFunction = document.getElementById("fitnessFunction");
+    var parameterValue = document.getElementById("parameterValue");
+    //var paramValues = parameterValue.value.split(",");
+
+    //interpret math
+    /*
+    var expr1 = Parser.parse(fitnessFunction.value);
+    for (i = 0; i < params.length; i++) {
+      var expr2 = expr1.substitute(params[i].value, "x");
+      var result = expr2.evaluate({ x: paramValues[i].value });
+
+    }*/
+    var expr1 = Parser.parse(fitnessFunction.value);
+    var expr2 = expr1.substitute(parameter.value, "x");
+    var result = expr2.evaluate({ x: parameterValue.value });
 
 
-
-    var formula = fitnessFunction.value;
-    var expression = Parser.parse(formula);
-    var result = expression.evaluate({ x: parameter.value });
-
-
-
-
+    //print results
     document.getElementById("result").innerHTML = result.toString();
-}
 
-window.optimize = optimize;
+}
 
 },{"expr-eval":2}],2:[function(require,module,exports){
 (function (global, factory) {
